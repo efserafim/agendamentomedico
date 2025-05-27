@@ -1,0 +1,40 @@
+modules = ["csharp"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "MedicalScheduler"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "run_csharp_app"
+
+[[workflows.workflow]]
+name = "MedicalScheduler"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "dotnet add package Microsoft.EntityFrameworkCore.Sqlite && dotnet add package Microsoft.EntityFrameworkCore.Design && dotnet add package System.Windows.Forms && dotnet run"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "run_csharp_app"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "dotnet run"
+
+[deployment]
+run = ["sh", "-c", "dotnet add package Microsoft.EntityFrameworkCore.Sqlite && dotnet add package Microsoft.EntityFrameworkCore.Design && dotnet add package System.Windows.Forms && dotnet run"]
