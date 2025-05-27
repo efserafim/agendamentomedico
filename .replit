@@ -1,4 +1,4 @@
-modules = ["csharp"]
+modules = ["csharp", "dotnet"]
 
 [nix]
 channel = "stable-24_05"
