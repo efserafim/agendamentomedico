@@ -1,14 +1,14 @@
 using System;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
-using MedicalScheduler.Data;
+using AgendamentoMedico.Dados;
 
-namespace MedicalScheduler
+namespace AgendamentoMedico
 {
     internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// O ponto de entrada principal para a aplicação.
         /// </summary>
         [STAThread]
         static void Main()
@@ -16,13 +16,13 @@ namespace MedicalScheduler
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            // Initialize database
-            using (var context = new ClinicContext())
+            // Inicializar banco de dados
+            using (var contexto = new ContextoClinica())
             {
-                context.Database.EnsureCreated();
+                contexto.Database.EnsureCreated();
             }
             
-            Application.Run(new MainForm());
+            Application.Run(new FormularioPrincipal());
         }
     }
 }
